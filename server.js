@@ -5,5 +5,5 @@ const port = 3000;
 
 server.listen(port, () => {
     // eslint-disable-next-line
-   console.log('server running on', server.address().port);
+   console.log('server running on port:', server.address().port);
 });
