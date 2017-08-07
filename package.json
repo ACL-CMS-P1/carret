@@ -16,14 +16,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sevfitz/carret.git"
+    "url": "git+https://github.com/ACL-CMS-P1/carret"
   },
   "author": "Christy LaGuardia, Mark Petrie, Stephanie Fitzgerald",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sevfitz/carret/issues"
+    "url": "https://github.com/ACL-CMS-P1/carret/issues"
   },
-  "homepage": "https://github.com/sevfitz/carret#readme",
+  "homepage": "https://github.com/ACL-CMS-P1/carret#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.2",
