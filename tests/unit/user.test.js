@@ -8,7 +8,7 @@ describe('User model', () => {
         const user = new User({
             name: 'test user',
             email: 'test@test.com',
-            roles: 'admin'
+            role: 'admin'
         });
         const password = 'abc';
 
@@ -35,7 +35,7 @@ describe('User model', () => {
         const user = new User({
             name: {},
             email: {},
-            roles: {},
+            role: {},
             password: {}
         });
         return user.validate()
