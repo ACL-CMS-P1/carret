@@ -8,7 +8,7 @@ describe('Event model', () => {
     it('new event passes validation with required fields', () => {
         const event = new Event({
             name: 'concurrent login',
-            category: 'ip',
+            type: 'blocked login',
             level: 'high'
         });
 
