@@ -13,7 +13,7 @@ describe('Event model', () => {
         });
 
         assert.equal(event.name, 'concurrent login');
-        assert.equal(event.category, 'ip');
+        assert.equal(event.type, 'blocked login');
         assert.equal(event.level, 'high');
     });
 
