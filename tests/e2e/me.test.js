@@ -7,43 +7,31 @@ const { assert } = require('chai');
 describe('users api', () => {
 
     before(db.drop);
-    
+
     const me = {
         name: 'logged in user',
         email: 'me@test.com',
         role: 'user',
         password: 'abc'
     };
-    let savedUser = {};
+    let token = null;
 
-    it('GETs user\'s own account info', () => {
+    before(() => {
         return request.post('/auth/signup')
             .send(me)
-            .then((res) => {
-                return tokenService.verify(res.body.token)
-                    .then(newUser=> {
-                        savedUser = newUser;
-                        return User.findOne(newUser.email);
-                    })
-                    .then(myInfo => assert.equal(myInfo.email, me.email))
-                    .catch();
-            
-            });
+            .then(t => token = t.body.token);
     });
 
-    // it('GETs user\'s own account info', () => {
-    //     return request.post('/auth/signup')
-    //         .send(me)
-    //         .then((res) => {
-                
-    //         })
-    //         .then(() => {
-    //             request.get(`/users/${newUser._id}`)
-    //                 .set('Authorization', token);
-    //         })            
-    //         .then(res => res.body)
-    //         .then(myInfo => assert.deepEqual(myInfo, me))
-    //         .catch();
-            
-    // });
+    it('GETs user\'s own account info', () => {
+        return request.get('/me')
+            .set('Authorization', token)
+            .then(
+                res => {
+                    const myInfo = res.body;
+                    delete me.password;
+                    assert.deepEqual(myInfo, me);
+                });
+    });
+
+
 });
