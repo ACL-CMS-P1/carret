@@ -12,10 +12,9 @@ describe('sqreen api', () => {
 
         return request.get(`/sqreen/emails/${testEmail}`)
             .then((res) => {
-                const riskAssessment = JSON.parse(res.body.text);
-                assert.equal(res.status, 200);
-                assert.equal(riskAssessment.email, testEmail);
-                assert.exists(riskAssessment.risk_score);
+                assert.equal(res.body.status, 200);
+                assert.equal(res.body.riskAssessment.email, testEmail);
+                assert.exists(res.body.riskAssessment.risk_score);
             });
     });
 
@@ -36,14 +35,13 @@ describe('sqreen api', () => {
 
         return request.get(`/sqreen/ips/${testIp}`)
             .then((res) => {
-                const riskAssessment = JSON.parse(res.body.text);
-                assert.equal(res.status, 200);
-                assert.equal(riskAssessment.ip, testIp);
-                assert.exists(riskAssessment.risk_score);
+                assert.equal(res.body.status, 200);
+                assert.equal(res.body.riskAssessment.ip, testIp);
+                assert.exists(res.body.riskAssessment.risk_score);
             });
     });
 
-        
+    //QUESTION: not sure why this isn't passing :(
     it.skip('/ips returns error with an invalid ip address', () => {
         const testIp = 'bad';
 
@@ -51,6 +49,7 @@ describe('sqreen api', () => {
             .then(() => {
                 throw new Error('should have returned an error but did not');
             }, (res) => {
+                console.log(res);
                 assert.equal(res.status, 400);
                 assert.equal(res.message, 'Bad Request');
             });
