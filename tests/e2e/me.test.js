@@ -1,7 +1,5 @@
 const db = require('./helpers/db');
 const request = require('./helpers/request');
-const User = require('../../lib/models/user');
-const tokenService = require('../../lib/auth/token-service');
 const { assert } = require('chai');
 
 describe('users api', () => {
@@ -50,4 +48,15 @@ describe('users api', () => {
             });
     });
 
+    it('DELETEs user\'s own account', () => {
+        return request.delete('/me')
+            .set('Authorization', token)
+            .then(res => assert.deepEqual(res.body, { removed: true }));
+    });
+
+    it('Attempt to DELETE user\'s own account fails if not there to delete', () => {
+        return request.delete('/me')
+            .set('Authorization', token)
+            .then(res => assert.deepEqual(res.body, { removed: false }));
+    });
 });
