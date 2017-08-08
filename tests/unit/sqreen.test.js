@@ -4,7 +4,7 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 const sqreen = require('../../lib/utils/sqreen');
 
-describe.only('sqreen api', () => {
+describe('sqreen api', () => {
 
     it('screens an email and returns risk assessment with a VALID email address', () => {
         const testEmail = 'christinelaguardia@gmail.com';
