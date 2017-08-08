@@ -8,12 +8,12 @@ describe('Event model', () => {
     it('new event passes validation with required fields', () => {
         const event = new Event({
             name: 'concurrent login',
-            category: 'ip',
+            type: 'blocked login',
             level: 'high'
         });
 
         assert.equal(event.name, 'concurrent login');
-        assert.equal(event.category, 'ip');
+        assert.equal(event.type, 'blocked login');
         assert.equal(event.level, 'high');
     });
 
