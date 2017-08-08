@@ -5,48 +5,55 @@ chai.use(chaiHttp);
 const app = require('../../lib/app');
 const request = chai.request(app);
 
-require('dotenv').config();
-const key = process.env.SQREEN_API_KEY;
-
 describe('sqreen api', () => {
 
-    // {
-    //     "email": "ChunkyLover53@aol.com",
-    //     "risk_score": 80,
-    //     "is_known_attacker": true,
-    //     "high_risk_security_events_count": 3,
-    //     "security_events_count": 15,
-    //     "is_disposable": false,
-    //     "is_email_malformed": false,
-    //     "is_email_harmful": false
-    // }
-
-    it('/emails with a valid email address', () => {
+    it('/emails returns risk assessment with a valid email address', () => {
         const testEmail = 'christinelaguardia@gmail.com';
 
         return request.get(`/sqreen/emails/${testEmail}`)
             .then((res) => {
-                const status = res.body.status;
                 const riskAssessment = JSON.parse(res.body.text);
-
-                assert.equal(status, 200);
+                assert.equal(res.status, 200);
                 assert.equal(riskAssessment.email, testEmail);
                 assert.exists(riskAssessment.risk_score);
             });
-
     });
 
-    it('/emails complains about an invalid email address', () => {
+    it('/emails returns error with an invalid email address', () => {
         const testEmail = '#';
 
         return request.get(`/sqreen/emails/${testEmail}`)
             .then(() => {
-                throw new Error('should have gotten an error but did not');
+                throw new Error('should have returned an error but did not');
             }, (res) => {
                 assert.equal(res.status, 404);
                 assert.equal(res.message, 'Not Found');
             });
     });
 
+    it('/ips returns risk assessment with valid ip address', () => {
+        const testIp = '65.154.20.170';
+
+        return request.get(`/sqreen/ips/${testIp}`)
+            .then((res) => {
+                const riskAssessment = JSON.parse(res.body.text);
+                assert.equal(res.status, 200);
+                assert.equal(riskAssessment.ip, testIp);
+                assert.exists(riskAssessment.risk_score);
+            });
+    });
+
+        
+    it.skip('/ips returns error with an invalid ip address', () => {
+        const testIp = 'bad';
+
+        return request.get(`/sqreen/ips/${testIp}`)
+            .then(() => {
+                throw new Error('should have returned an error but did not');
+            }, (res) => {
+                assert.equal(res.status, 400);
+                assert.equal(res.message, 'Bad Request');
+            });
+    });
 
 });
