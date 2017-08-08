@@ -6,51 +6,60 @@ const sqreen = require('../../lib/utils/sqreen');
 
 describe.only('sqreen api', () => {
 
-    it('sqreens an email and returns risk assessment with a valid email address', () => {
+    it('screens an email and returns risk assessment with a VALID email address', () => {
         const testEmail = 'christinelaguardia@gmail.com';
 
         return sqreen.sqreenEmail(testEmail)
-            .then((res) => {
+            .then(res => {
                 assert.equal(res.email, testEmail);
                 assert.exists(res.risk_score);
             });
     });
 
-    it('/emails returns error with an invalid email address', () => {
+    it('screens an email returns NOT FOUND with an INVALID email address', () => {
         const testEmail = '#';
 
         return sqreen.sqreenEmail(testEmail)
             .then(() => {
                 throw new Error('should have returned an error but did not');
-            }, (res) => {
+            }, res => {
                 assert.equal(res.status, 404);
                 assert.equal(res.message, 'Not Found');
             });
     });
 
-    // it('/ips returns risk assessment with valid ip address', () => {
-    //     const testIp = '65.154.20.170';
+    it('screens an ip returns risk assessment with VALID ip address', () => {
+        const testIp = '65.154.20.170';
 
-    //     return request.get(`/sqreen/ips/${testIp}`)
-    //         .then((res) => {
-    //             assert.equal(res.body.status, 200);
-    //             assert.equal(res.body.riskAssessment.ip, testIp);
-    //             assert.exists(res.body.riskAssessment.risk_score);
-    //         });
-    // });
+        return sqreen.sqreenIp(testIp)
+            .then(res => {
+                assert.equal(res.ip, testIp);
+                assert.exists(res.risk_score);
+            });
+    });
 
-    // //QUESTION: not sure why this isn't passing :(
-    // it.skip('/ips returns error with an invalid ip address', () => {
-    //     const testIp = 'bad';
+    it('screens an ip returns NOT FOUND with an INVALID ip address', () => {
+        const testIp = '';
 
-    //     return request.get(`/sqreen/ips/${testIp}`)
-    //         .then(() => {
-    //             throw new Error('should have returned an error but did not');
-    //         }, (res) => {
-    //             console.log(res);
-    //             assert.equal(res.status, 400);
-    //             assert.equal(res.message, 'Bad Request');
-    //         });
-    // });
+        return sqreen.sqreenIp(testIp)
+            .then(() => {
+                throw new Error('should have returned an error but did not');
+            }, res => {
+                assert.equal(res.status, 404);
+                assert.equal(res.message, 'Not Found');
+            });
+    });
+
+    it('screens an ip returns BAD REQUEST with an INVALID ip address', () => {
+        const testIp = 'BLAH';
+
+        return sqreen.sqreenIp(testIp)
+            .then(() => {
+                throw new Error('should have returned an error but did not');
+            }, res => {
+                assert.equal(res.status, 400);
+                assert.equal(res.message, 'Bad Request');
+            });
+    });
 
 });
