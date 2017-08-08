@@ -1,52 +1,49 @@
 const db = require('./helpers/db');
 const request = require('./helpers/request');
+const User = require('../../lib/models/user');
+const tokenService = require('../../lib/auth/token-service');
 const { assert } = require('chai');
 
 describe('users api', () => {
 
     before(db.drop);
-
-    let token = null;
-    before(() => db.getToken().then(t => token = t));
     
-    let me = {
+    const me = {
         name: 'logged in user',
-        email: 'testy@test.com',
+        email: 'me@test.com',
         role: 'user',
         password: 'abc'
     };
-
-    // function saveUser(user) {
-    //     return request
-    //         .post('/users/me')
-    //         .set('Authorization', token)
-    //         .send(user)
-    //         .then(({ body }) => {
-    //             user._id = body._id;
-    //             user.__v = body.__v;
-    //             return body;
-    //         });
-    // }
-
-    // it.only('saves a user', () => {
-    //     return saveUser(me)
-    //         .then(savedUser => {
-    //             assert.ok(savedUser._id);
-    //             assert.deepEqual(savedUser, me);
-    //         });
-    // });
+    let savedUser = {};
 
     it('GETs user\'s own account info', () => {
-        request.post('/auth/signup')
+        return request.post('/auth/signup')
             .send(me)
-            .then(user => request
-                .get(`/users/me/${user._id}`)
-                .set('Authorization', token)
-            )
-            .then(res => res.body)
-            .then(myInfo => assert.deepEqual(myInfo, me));
+            .then((res) => {
+                return tokenService.verify(res.body.token)
+                    .then(newUser=> {
+                        savedUser = newUser;
+                        return User.findOne(newUser.email);
+                    })
+                    .then(myInfo => assert.equal(myInfo.email, me.email))
+                    .catch();
             
+            });
     });
-    
 
+    // it('GETs user\'s own account info', () => {
+    //     return request.post('/auth/signup')
+    //         .send(me)
+    //         .then((res) => {
+                
+    //         })
+    //         .then(() => {
+    //             request.get(`/users/${newUser._id}`)
+    //                 .set('Authorization', token);
+    //         })            
+    //         .then(res => res.body)
+    //         .then(myInfo => assert.deepEqual(myInfo, me))
+    //         .catch();
+            
+    // });
 });
