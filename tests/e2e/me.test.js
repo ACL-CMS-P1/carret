@@ -19,7 +19,10 @@ describe('users api', () => {
     before(() => {
         return request.post('/auth/signup')
             .send(me)
-            .then(t => token = t.body.token);
+            .then(t => {
+                delete me.password;
+                token = t.body.token;
+            });
     });
 
     it('GETs user\'s own account info', () => {
@@ -28,10 +31,23 @@ describe('users api', () => {
             .then(
                 res => {
                     const myInfo = res.body;
-                    delete me.password;
                     assert.deepEqual(myInfo, me);
                 });
     });
 
+    it('PATCHes user\'s own account info', () => {
+        return request.patch('/me')
+            .set('Authorization', token)
+            .send({ email: 'newemail@email.com' })
+            .then(() => request
+                .get('/me')
+                .set('Authorization', token)
+            )
+            .then(res => {
+                me.email = 'newemail@email.com';
+                const patchedMe = res.body;
+                assert.deepEqual(patchedMe, me);
+            });
+    });
 
 });
