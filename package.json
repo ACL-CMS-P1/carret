@@ -2,7 +2,7 @@
   "name": "carret",
   "version": "1.0.0",
   "engines": {
-    "node": "8.x"
+    "node": ">8.0.0"
   },
   "description": "Alchemy Code Labs - 401 Team Project",
   "main": "server.js",
@@ -34,6 +34,7 @@
     "express": "^4.15.4",
     "jsonwebtoken-promisified": "^1.0.3",
     "mongoose": "^4.11.6",
+    "morgan": "^1.8.2",
     "superagent": "^3.5.2"
   },
   "devDependencies": {
@@ -41,7 +42,6 @@
     "chai-http": "^3.0.0",
     "eslint": "^4.4.1",
     "mocha": "^3.5.0",
-    "morgan": "^1.8.2",
     "nodemon": "^1.11.0"
   }
 }
