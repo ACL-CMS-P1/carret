@@ -3,13 +3,6 @@ const request = require('./helpers/request');
 const { assert } = require('chai');
 
 describe.only('admin only options', () => {
-    
-    let admin = {
-        name: 'admin0',
-        email: 'zero@admin.com',
-        password: 'password0',
-        role: 'admin'
-    };
 
     let users = [
         {
@@ -34,12 +27,7 @@ describe.only('admin only options', () => {
     function signup(user) {
         return request.post('/auth/signup')
             .send(user)
-            .then(({ body }) => {
-                delete user.password;
-                // user._id = body._id;
-                // user.__v = body.__v;
-                return body;
-            });
+            .then(res => res.body);
     }
 
     // function signin(user) {
@@ -52,20 +40,47 @@ describe.only('admin only options', () => {
 
     before(() => Promise.all(users.map(signup)));
 
-    it('/users returns list of all users', () => {
+    it('/users', () => {
+        let admin = {
+            name: 'admin0',
+            email: 'zero@admin.com',
+            password: 'password0',
+            role: 'admin'
+        };
+        let adminToken = null;
+        let expectedUsers = users.map(u => ({ name: u.name, email: u.email, role: u.role }));
 
-        let token = null;
-        
         return signup(admin)
-            .then(t => token = t.token)
+            .then(t => adminToken = t.token)
             .then(() => request
                 .get('/admin/users')
-                .set('Authorization', token)
+                .set('Authorization', adminToken)
             )
             .then(res => {
-                console.log('found users', res.body);
-                const users = res.body.sort((a,b) => a.name < b.name ? 1 : -1 );
-                assert.deepEqual(users, users);
+                const foundUsers = res.body.sort((a,b) => a.name > b.name ? 1 : -1 );
+                assert.deepEqual(foundUsers, expectedUsers);
+            });
+    });
+
+    it('/users/:email', () => {
+        let admin = {
+            name: 'admin1',
+            email: 'one@admin.com',
+            password: 'password1',
+            role: 'admin'
+        };
+        let adminToken = null;
+        let myUser = users[0];
+        let expectedUser = { name: myUser.name, email: myUser.email, role: myUser.role };
+        
+        return signup(admin)
+            .then(t => adminToken = t.token)
+            .then(() => request
+                .get(`/admin/users/${myUser.email}`)
+                .set('Authorization', adminToken)
+            )
+            .then(res => {
+                assert.deepEqual(res.body, expectedUser);
             });
     });
 
