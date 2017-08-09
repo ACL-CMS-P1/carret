@@ -2,7 +2,7 @@
   "name": "carret",
   "version": "1.0.0",
   "engines": {
-    "node": "8.x"
+    "node": ">8.0.0"
   },
   "description": "Alchemy Code Labs - 401 Team Project",
   "main": "server.js",
