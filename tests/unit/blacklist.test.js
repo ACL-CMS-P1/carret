@@ -2,7 +2,7 @@ const assert = require('chai').assert;
 const Blacklist = require('../../lib/models/blacklist');
 const Event = require('../../lib/models/event');
 
-describe.only('blacklist model', () => {
+describe('blacklist model', () => {
 
     it('validates with required fields', () => {
 
