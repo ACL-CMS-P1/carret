@@ -10,7 +10,8 @@ describe('users api', () => {
         name: 'logged in user',
         email: 'me@test.com',
         role: 'user',
-        password: 'abc'
+        password: 'abc',
+        status: 'active'
     };
     let token = null;
 
