@@ -81,25 +81,37 @@ describe.only('admin only options', () => {
 
     it('PATCH /admin/users/email returns updated user by email', () => {
         let adminToken = null;
-        
-        let myUser = users[1];
-        let oldEmail = users[1].email;
+        let myUser = users[0];
         let newEmail = 'update@user.com';
-        
-        let expectedUser = { name: myUser.name, email: newEmail, role: myUser.role };
+        let expectedUser = {name: myUser.name, email: newEmail, role: myUser.role };
         
         return signin(admin)
             .then(t => adminToken = t.token)
             .then(() => request
-                .patch(`/admin/users/${oldEmail}`)
-                .send({ email: newEmail })
+                .patch(`/admin/users/${myUser.email}`)
                 .set('Authorization', adminToken)
+                .send({ email: newEmail })
             )
             .then(res => {
                 assert.deepEqual(res.body, expectedUser);
             });
     });
     
-    // it('DELETE /admin/users/email', () => {})
+    it('DELETE /admin/users/email', () => {
+        let adminToken = null;
+        let myUser = users[1];
+
+        return signin(admin)
+            .then(t => adminToken = t.token)
+            .then(() => { request
+                .delete(`/admin/users/${myUser.email}`)
+                .set('Authorization', adminToken)
+                .then(res => {
+                    assert.deepEqual(res.body, { removed: true });
+                });
+            });
+
+
+    });
 
 });
