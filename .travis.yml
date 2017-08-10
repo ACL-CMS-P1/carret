@@ -11,7 +11,3 @@ addons:
     - mongodb-3.4-precise
     packages:
     - mongodb-org-server
-
-matrix:
-  allow_failures:
-    - env: SQREEN_API_KEY

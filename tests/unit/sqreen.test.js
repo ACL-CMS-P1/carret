@@ -1,8 +1,6 @@
 const assert = require('chai').assert;
 const sqreen = require('../../lib/utils/sqreen');
 
-// if(process.env.CI !== true && process.env.TRAVIS !== true) {
-
 describe('sqreen api', () => {
 
     it('screens an email and returns risk assessment with a VALID email address', () => {
@@ -62,4 +60,3 @@ describe('sqreen api', () => {
     });
 
 });
-// }
