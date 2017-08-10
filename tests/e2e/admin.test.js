@@ -53,7 +53,7 @@ describe('admin only options', () => {
 
     it('GET /admin/users returns list of all users', () => {
         let adminToken = null;
-        let expectedUsers = users.map(u => ({ name: u.name, email: u.email, role: u.role }));
+        let expectedUsers = users.map(u => ({ name: u.name, email: u.email, role: u.role, status: u.status }));
 
         return signin(admin)
             .then(t => adminToken = t.token)
@@ -88,7 +88,7 @@ describe('admin only options', () => {
     it('GET /admin/users/:email returns a user by email', () => {
         let adminToken = null;
         let myUser = users[0];
-        let expectedUser = { name: myUser.name, email: myUser.email, role: myUser.role };
+        let expectedUser = { name: myUser.name, email: myUser.email, role: myUser.role, status: myUser.status };
         
         return signin(admin)
             .then(t => adminToken = t.token)
@@ -105,7 +105,7 @@ describe('admin only options', () => {
         let adminToken = null;
         let myUser = users[0];
         let newEmail = 'update@user.com';
-        let expectedUser = {name: myUser.name, email: newEmail, role: myUser.role };
+        let expectedUser = {name: myUser.name, email: newEmail, role: myUser.role, status: myUser.status };
         
         return signin(admin)
             .then(t => adminToken = t.token)
