@@ -4,7 +4,7 @@
 
 label {
     display: inline-block;
-    text-align: left;
+    text-align: right;
     width: 100px;
     clear: right;
 }
@@ -20,7 +20,6 @@ input {
 }
 
 button {
-    
     border-radius: .25rem;
     min-width: 100px;
     padding: .5rem;
