@@ -4,7 +4,7 @@ const { assert } = require('chai');
 
 const Event = require('../../lib/models/event');
 
-describe.only('admin only reports', () => {
+describe('admin only reports', () => {
 
     let admin = {
         name: 'Mr. Admin Reporter',
