@@ -3,7 +3,7 @@ const request = require('./helpers/request');
 const assert = require('chai').assert;
 const Rule = require('../../lib/models/rule');
 
-describe.only('Admin only options - Rules API', () => {
+describe('Admin only options - Rules API', () => {
 
     let adminUser = {
         name: 'Admin User',
