@@ -9,18 +9,21 @@ describe('admin only options', () => {
             name: 'user1',
             email: 'one@user.com',
             password: 'password1',
-            role: 'user'
+            role: 'user',
+            status: 'active'
         },
         {
             name: 'user2',
             email: 'two@user.com',
             password: 'password2',
-            role: 'user'
+            role: 'user',
+            status: 'active'
         },{
             name: 'user3',
             email: 'three@user.com',
             password: 'password3',
-            role: 'user'
+            role: 'user',
+            status: 'active'
         }
     ];
 
@@ -28,7 +31,8 @@ describe('admin only options', () => {
         name: 'admin0',
         email: 'zero@admin.com',
         password: 'password0',
-        role: 'admin'
+        role: 'admin',
+        status: 'active'
     };
 
     function signup(user) {
