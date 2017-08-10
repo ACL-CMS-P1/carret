@@ -13,7 +13,7 @@ describe('event', () => {
         role: 'user'
     };
 
-    describe('management', () => {
+    // describe('management', () => {
 
         // const badRequest = (url, data, code, error) =>
         //     request
@@ -28,5 +28,7 @@ describe('event', () => {
         //                 assert.equal(res.response.body.error, error);
         //             }
         //         );
-    });
+    // });
+
+    
 });
