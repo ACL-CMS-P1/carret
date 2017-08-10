@@ -6,8 +6,9 @@ describe('auth', () => {
 
     before(db.drop);
 
-    const user = {
-        email: 'test@test.com',
+    const goodUser = {
+        email: 'petrie.mark@gmail.com',
+        ip: '192.168.1.1',
         password: 'abc',
         name: 'test user',
         role: 'admin',
@@ -43,12 +44,12 @@ describe('auth', () => {
         it('signup', () => {
             return request
                 .post('/auth/signup')
-                .send(user)
+                .send(goodUser)
                 .then(res => assert.ok(token = res.body.token));
         });
 
         it('can\'t use same email', () =>
-            badRequest('/auth/signup', user, 400, 'the email provided is already in use')
+            badRequest('/auth/signup', goodUser, 400, 'the email provided is already in use')
         );
 
 
@@ -61,17 +62,17 @@ describe('auth', () => {
         );
 
         it('signin with wrong user', () =>
-            badRequest('/auth/signin', { email: 'bad user', password: user.password }, 401, 'Invalid Login')
+            badRequest('/auth/signin', { email: 'bad user', password: goodUser.password }, 401, 'Invalid Login')
         );
 
         it('signin with wrong password', () =>
-            badRequest('/auth/signin', { email: user.email, password: 'bad' }, 401, 'Invalid Login')
+            badRequest('/auth/signin', { email: goodUser.email, password: 'bad' }, 401, 'Invalid Login')
         );
 
         it('signin', () =>
             request
                 .post('/auth/signin')
-                .send(user)
+                .send(goodUser)
                 .then(res => assert.ok(res.body.token))
         );
 

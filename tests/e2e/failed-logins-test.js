@@ -23,14 +23,6 @@ describe('failed-logins', () => {
         badUser.save();
     });
 
-    it('locks existing user account', () => {
-        return failedLogins.lockUserAccount({ email: badUser.email })
-            .then(() => User.findOne({ email: badUser.email })
-                .then(lockedUser => {
-                    assert.equal(lockedUser.status, 'locked');
-                }));
-    });
-
     it('adds bad ip to ipBlacklist', () => {
         return failedLogins.addToIpBlacklist(
             {
@@ -51,7 +43,6 @@ describe('failed-logins', () => {
                 is_proxy: false,
                 is_private: false,
                 is_tor: false,
-                status: 'active'
             })
             .then((res) => ipBlacklist.findOne({ ip: res.ip })
                 .then(badIp => {
@@ -74,6 +65,14 @@ describe('failed-logins', () => {
             .then((res) => emailBlacklist.findOne({ email: res.email })
                 .then(badEmail => {
                     assert.equal(badEmail.email, 'attacker@yopmail.com');
+                }));
+    });
+
+    it('locks existing user account', () => {
+        return failedLogins.lockUserAccount({ email: badUser.email })
+            .then(() => User.findOne({ email: badUser.email })
+                .then(lockedUser => {
+                    assert.equal(lockedUser.status, 'locked');
                 }));
     });
 });
