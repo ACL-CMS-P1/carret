@@ -2,7 +2,7 @@ const db = require('./helpers/db');
 const request = require('./helpers/request');
 const { assert } = require('chai');
 
-describe.only('admin only options', () => {
+describe('admin only options', () => {
 
     let users = [
         {
