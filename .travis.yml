@@ -1,7 +1,6 @@
 language: node_js
 node_js:
-  - "8"
-
+- '8'
 sudo: false
 services:
 - mongodb
@@ -11,3 +10,6 @@ addons:
     - mongodb-3.4-precise
     packages:
     - mongodb-org-server
+env:
+  matrix:
+    secure: mKR6ryKRHU8XQ9fCchi7qBaVyYlcxBmrDuVYhe0mTCQ9PgrCKXqdzVl1rYn80X60jNSAFTTaiAGCzkvWJJKvjbk58Frt0EfvfElkj3XKQXnraiitzS1eaf0/qTYW7OX6ZtKGNZZaGmUzTE9Eov9KFkrTG8U3QiJLEU81HqJUmehyfnKR9xgk3MdK79SoKEzWctC7yQ6uLMpQaj9vgYOP9pc3KpXSp4+inalSuLtKDmIIzVF0Vpg8EKASFMtoeeDTCdzxH8j4EN0E1paHs3HtxdArowFep+oDhdRH0h2bkh6AYLMWgKC+xmlXqh+8hNJ2Q/X5793zHETI2zMds1RsfZpT8amiHQvs8DP6R99UvOfc1alYp+Cw1F1FfWXbl8w2pRXjpt4I1kVY4WUPKijFf3nb1FAsF10SThbx6wPStjMw0SlKeuvyyvtLSB6/iT/IWAyjGeLCEm6N59gOTWYFmUwmbstUXiQ9db1MWZ7JvzYiw97mwubDOpbl6OqjbBmJ0N0oGgbCnY9qGNRXPn1cjvBOq4hHN2EzOTvhvvDhAXKbaUnJ1sc3va/ZeNRowJVrq5qRQRPWRY+YheG6kDl3WL7MziwWiYKUC9D2DHxR6IWg8BNGiBf78M+u4QDHb6pM31EobPmvHhy49/4NyE+ngxhu+wTDR1m397JzaRMxg00=
