@@ -1,7 +1,7 @@
 const assert = require('chai').assert;
 const sqreen = require('../../lib/utils/sqreen');
 
-if(process.env.CI != true && process.env.TRAVIS != true) {
+if(process.env.CI === true && process.env.TRAVIS === true) {
 
     describe('sqreen api', () => {
 
