@@ -34,27 +34,15 @@ describe('admin only options - Users API', () => {
         status: 'active'
     };
 
-    function signup(user) {
-        return request.post('/auth/signup')
-            .send(user)
-            .then(res => res.body);
-    }
-
-    function signin(user) {
-        return request.post('/auth/signin')
-            .send(user)
-            .then(res => res.body);
-    }
-
     before(db.drop);
-    before(() => signup(admin));
-    before(() => Promise.all(users.map(signup)));
+    before(() => db.signup(admin));
+    before(() => Promise.all(users.map(db.signup)));
 
     it('GET /admin/users returns list of all users', () => {
         let adminToken = null;
         let expectedUsers = users.map(u => ({ name: u.name, email: u.email, role: u.role, status: u.status }));
 
-        return signin(admin)
+        return db.signin(admin)
             .then(t => adminToken = t.token)
             .then(() => request
                 .get('/admin/users')
@@ -69,7 +57,7 @@ describe('admin only options - Users API', () => {
     it('GET /admin/users DOES NOT return a list of all users when requested by a non-admin, but instead returns an error', () => {
         let userToken = null;
         
-        return signin(users[0])
+        return db.signin(users[0])
             .then(t => userToken = t)
             .then(() => request
                 .get('/admin/users')
@@ -89,7 +77,7 @@ describe('admin only options - Users API', () => {
         let myUser = users[0];
         let expectedUser = { name: myUser.name, email: myUser.email, role: myUser.role, status: myUser.status };
         
-        return signin(admin)
+        return db.signin(admin)
             .then(t => adminToken = t.token)
             .then(() => request
                 .get(`/admin/users/${myUser.email}`)
@@ -106,7 +94,7 @@ describe('admin only options - Users API', () => {
         let newEmail = 'update@user.com';
         let expectedUser = {name: myUser.name, email: newEmail, role: myUser.role, status: myUser.status };
         
-        return signin(admin)
+        return db.signin(admin)
             .then(t => adminToken = t.token)
             .then(() => request
                 .patch(`/admin/users/${myUser.email}`)
@@ -122,7 +110,7 @@ describe('admin only options - Users API', () => {
         let adminToken = null;
         let myUser = users[1];
 
-        return signin(admin)
+        return db.signin(admin)
             .then(t => adminToken = t.token)
             .then(() => { request
                 .delete(`/admin/users/${myUser.email}`)

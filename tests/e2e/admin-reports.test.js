@@ -2,8 +2,6 @@ const db = require('./helpers/db');
 const request = require('./helpers/request');
 const { assert } = require('chai');
 
-const Event = require('../../lib/models/event');
-
 describe('admin only reports', () => {
 
     let admin = {
@@ -36,34 +34,17 @@ describe('admin only reports', () => {
         { name: 'event 17', type: 'account locked', level: 'severe' }
     ];
 
-    function signup(user) {
-        return request.post('/auth/signup')
-            .send(user)
-            .then(res => res.body);
-    }
-
-    function signin(user) {
-        return request.post('/auth/signin')
-            .send(user)
-            .then(res => res.body);
-    }
-
-    function saveEvent(event) {
-        let newEvent = new Event(event);
-        newEvent.save();
-    }
-
     before(db.drop);
 
-    before(() => signup(admin));
+    before(() => db.signup(admin));
 
-    before(() => Promise.all(events.map(saveEvent)));
+    before(() => Promise.all(events.map(db.saveEvent)));
 
     it('/admin/reports/events?=type gets events for an enum type', () => {
         let adminToken = null;
         let eventTypes = ['login', 'logout', 'signup', 'login failed', 'login blocked', 'signup blocked', 'account locked'];
 
-        return signin(admin)
+        return db.signin(admin)
             .then(t => adminToken = t.token)
             .then(() => request
                 .get(`/admin/reports/events?type=${eventTypes[0]}`)
@@ -74,5 +55,7 @@ describe('admin only reports', () => {
                 assert.ok(res.body);
             });
     });
+
+    //TODO: add more reports...
 
 });
