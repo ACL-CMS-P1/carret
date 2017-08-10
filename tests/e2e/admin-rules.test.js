@@ -13,18 +13,6 @@ describe('Admin only options - Rules API', () => {
         status: 'active'
     };
 
-    function signup(user) {
-        return request.post('/auth/signup')
-            .send(user)
-            .then(res => res.body);
-    }
-
-    function signin(user) {
-        return request.post('/auth/signin')
-            .send(user)
-            .then(res => res.body);
-    }
-
     let rules = [
         {
             name: 'rule1',
@@ -37,19 +25,14 @@ describe('Admin only options - Rules API', () => {
         }
     ];
 
-    function saveRule(rule) {
-        const savedRule = new Rule(rule);
-        return savedRule.save();
-    }
-
     before(db.drop);
-    before(() => Promise.all(rules.map(saveRule)));
+    before(() => Promise.all(rules.map(db.saveRule)));
 
     it('GET /admin/rules returns list of all rules', () => {
         let adminToken = null;
         let returnedRules = null;
 
-        return signup(adminUser)
+        return db.signup(adminUser)
             .then(t => adminToken = t.token)
             .then(() => request
                 .get('/admin/rules')
@@ -65,7 +48,7 @@ describe('Admin only options - Rules API', () => {
         let adminToken = null;
         let updatedRule = null;
 
-        return signin(adminUser)
+        return db.signin(adminUser)
             .then(t => adminToken = t.token)
             .then(() => request
                 .patch(`/admin/rules/${rules[0].name}`)
