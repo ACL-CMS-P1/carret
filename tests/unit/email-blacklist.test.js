@@ -1,7 +1,7 @@
 const assert = require('chai').assert;
 const EmailBlacklist = require('../../lib/models/email-blacklist');
 
-describe.only('email blacklist model', () => {
+describe('email blacklist model', () => {
 
     it('validates with required fields', () => {
 
