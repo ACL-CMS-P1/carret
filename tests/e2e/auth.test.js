@@ -10,7 +10,8 @@ describe('auth', () => {
         email: 'test@test.com',
         password: 'abc',
         name: 'test user',
-        role: 'admin'
+        role: 'admin',
+        status: 'active'
     };
 
     describe('user management', () => {
