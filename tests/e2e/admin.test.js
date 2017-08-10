@@ -63,6 +63,24 @@ describe.only('admin only options', () => {
             });
     });
 
+    it('GET /admin/users DOES NOT return a list of all users when requested by a non-admin, but instead returns an error', () => {
+        let userToken = null;
+        
+        return signin(users[0])
+            .then(t => userToken = t)
+            .then(() => request
+                .get('/admin/users')
+                .set('Authorization', userToken)
+            )
+            .then(
+                () => { throw new Error('success response not expected'); },
+                (res) => {
+                    assert.equal(res.status, 401); //supposed to be a 403?
+                    assert.equal(res.message, 'Unauthorized');
+                }
+            );
+    });
+
     it('GET /admin/users/:email returns a user by email', () => {
         let adminToken = null;
         let myUser = users[0];
