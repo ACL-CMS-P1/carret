@@ -2,19 +2,19 @@
     {
         "name": "Christy La Guardia",
         "email": "christy@teamcaret.com",
-        "password": "chr15ty",
+        "password": "christy",
         "role": "admin",
         "status": "active"
     },{
         "name": "Mark Petrie",
         "email": "mark@teamcaret.com",
-        "password": "|v|ark!",
+        "password": "mark",
         "role": "admin",
         "status": "active"
     },{
         "name": "Stephanie Fitzgerald",
         "email": "stephanie@teamcaret.com",
-        "password": "5t3phan13",
+        "password": "stephanie",
         "role": "admin",
         "status": "active"
     }
