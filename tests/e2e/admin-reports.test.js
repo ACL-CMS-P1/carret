@@ -2,7 +2,7 @@ const db = require('./helpers/db');
 const request = require('./helpers/request');
 const { assert } = require('chai');
 
-describe.only('admin only reports', () => {
+describe('admin only reports', () => {
 
     let admin = {
         name: 'Mr. Admin Reporter',
