@@ -15,6 +15,17 @@ describe('auth', () => {
         status: 'active'
     };
 
+    const goodUser2 = {
+        email: 'petrie2.mark@gmail.com',
+        ip: '192.168.1.1',
+        password: 'abcdfg',
+        name: 'test user2',
+        role: 'admin',
+        status: 'active'
+    };
+
+    before(() => db.signup(goodUser2));
+
     describe('user management', () => {
 
         const badRequest = (url, data, code, error) =>
@@ -72,8 +83,10 @@ describe('auth', () => {
         it('signin', () =>
             request
                 .post('/auth/signin')
-                .send(goodUser)
-                .then(res => assert.ok(res.body.token))
+                .send(goodUser2)
+                .then(res => {
+                    assert.ok(res.body.token);
+                })
         );
 
 
