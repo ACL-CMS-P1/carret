@@ -39,7 +39,7 @@ describe('Admin only options - Rules API', () => {
                 .set('Authorization', adminToken)
             )
             .then(res => {
-                returnedRules = res.body;
+                returnedRules = res.body.sort((a, b) => a.name > b.name ? 1 : -1);
                 assert.deepEqual(returnedRules, rules);
             });
     });
