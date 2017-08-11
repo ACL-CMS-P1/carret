@@ -1,17 +1,21 @@
 # Team ^ Presentation
 
-## <http://carret.herokuapp.com/>
-## <https://github.com/ACL-CMS-P1>
+<http://carret.herokuapp.com/>
+
+<https://github.com/ACL-CMS-P1>
 
 ## What Is It?
 * User login security solution
-* To be deployed as NPM package for developers to implement in their own apps
-* 
+* To be deployed as NPM package for developers to implement in their own apps 
 
 ## What Does It Do?
-* 
-* 
-* 
+* Reduces risk of malicious user access
+* Stores user's profile and credentials
+* Provides security analysis of login/signup events
+* Full email risk analysis
+* Enriches client IP addresses with full risk analysis and geolocation
+* Generates IP and email blacklists
+* Role based access controls (admin, user)
 
 ## Third-Party API
 
@@ -165,4 +169,17 @@ Sign up failed for known hacker | POST | `http://carret.herokuapp.com/auth/signu
     "role": "user",
     "status": "active"
 }
+```
+
+...more bad emails...
+```
+[
+  { "name": "Darlene Alderson", "email": "k399792@mvrht.net", "password": "fsociety", "role": "user", "status": "active"},
+  { "name": "Angela Moss", "email": "hhhhhhhhhhhhhhhh@mailinator.com", "password": "fsociety", "role": "user", "status": "active"},
+  { "name": "Tyrell Wellick", "email": "email@email.com", "password": "fsociety", "role": "user", "status": "active"},
+  { "name": "Mr Robot", "email": "k888246@mvrht.net", "password": "fsociety", "role": "user", "status": "active"},
+  { "name": "Phillip Price", "email": "mail@mail.com", "password": "fsociety", "role": "user", "status": "active"},
+  { "name": "Joanna Wellick", "email": "mail@mail.com", "password": "fsociety", "role": "user", "status": "active"},
+  { "name": "Dominique Dom DiPierro", "email": "mail@mail.com", "password": "fsociety", "role": "user", "status": "active"}
+]
 ```
