@@ -1,17 +1,21 @@
 # Team ^ Presentation
 
-## <http://carret.herokuapp.com/>
-## <https://github.com/ACL-CMS-P1>
+<http://carret.herokuapp.com/>
+
+<https://github.com/ACL-CMS-P1>
 
 ## What Is It?
 * User login security solution
-* To be deployed as NPM package for developers to implement in their own apps
-* 
+* To be deployed as NPM package for developers to implement in their own apps 
 
 ## What Does It Do?
-* 
-* 
-* 
+* Reduces risk of malicious user access
+* Stores user's profile and credentials
+* Provides security analysis of login/signup events
+* Full email risk analysis
+* Enriches client IP addresses with full risk analysis and geolocation
+* Generates IP and email blacklists
+* Role based access controls (admin, user
 
 ## Third-Party API
 
