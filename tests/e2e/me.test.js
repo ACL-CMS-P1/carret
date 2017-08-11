@@ -14,13 +14,10 @@ describe('users api', () => {
         status: 'active'
     };
     let token = null;
-
     before(() => {
-        return request.post('/auth/signup')
-            .send(me)
+        return db.signup(me)
             .then(t => {
-                delete me.password;
-                token = t.body.token;
+                token = t.token;
             });
     });
 
@@ -29,10 +26,12 @@ describe('users api', () => {
             .set('Authorization', token)
             .then(
                 res => {
+                    delete me.password;
                     const myInfo = res.body;
                     assert.deepEqual(myInfo, me);
                 });
     });
+
 
     it('PATCHes user\'s own account info', () => {
         return request.patch('/me')
