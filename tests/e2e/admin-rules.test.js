@@ -32,6 +32,7 @@
 //         let adminToken = null;
 //         let returnedRules = null;
 
+<<<<<<< HEAD
 //         return db.signup(adminUser)
 //             .then(t => adminToken = t.token)
 //             .then(() => request
@@ -43,6 +44,19 @@
 //                 assert.deepEqual(returnedRules, rules);
 //             });
 //     });
+=======
+        return db.signup(adminUser)
+            .then(t => adminToken = t.token)
+            .then(() => request
+                .get('/admin/rules')
+                .set('Authorization', adminToken)
+            )
+            .then(res => {
+                returnedRules = res.body.sort((a, b) => a.name > b.name ? 1 : -1);
+                assert.deepEqual(returnedRules, rules);
+            });
+    });
+>>>>>>> 7c590dccd7f2d8b24f68f07ee4fd9a957bb1d05f
 
 //     it('PATCH /admin/rules/:name changes rule active', () => {
 //         let adminToken = null;
