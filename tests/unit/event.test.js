@@ -1,5 +1,3 @@
-
-const User = require('../../lib/models/user');
 const Event = require('../../lib/models/event');
 const {assert} = require('chai');
 
@@ -7,12 +5,12 @@ describe('Event model', () => {
 
     it('new event passes validation with required fields', () => {
         const event = new Event({
-            name: 'concurrent login',
+            email: 'mrrobot@protonmail.com',
             type: 'blocked login',
             level: 'high'
         });
 
-        assert.equal(event.name, 'concurrent login');
+        assert.equal(event.email, 'mrrobot@protonmail.com');
         assert.equal(event.type, 'blocked login');
         assert.equal(event.level, 'high');
     });
@@ -24,14 +22,16 @@ describe('Event model', () => {
             .then(
                 () => { throw new Error ('Expected validation error'); },
                 ({ errors }) => {
-                    assert.ok(errors.name);
+                    assert.ok(errors.email.name);
+                    assert.ok(errors.type.name);
+                    assert.ok(errors.level.name);
                 }
             );
     });
 
     it('fails validation with incorrect field type', () => {
         const event = new Event({
-            name: {},
+            email: {},
             type: {},
             level: {}
         });
@@ -39,7 +39,9 @@ describe('Event model', () => {
             .then(
                 () => { throw new Error('Expected validation error'); },
                 ({ errors }) => {
-                    assert.ok(errors.name);
+                    assert.ok(errors.email.name);
+                    assert.ok(errors.type.name);
+                    assert.ok(errors.level.name);
                 }
             );
     });

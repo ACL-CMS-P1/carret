@@ -1,34 +1,44 @@
 const db = require('./helpers/db');
-const request = require('./helpers/request');
 const { assert } = require('chai');
+const Event = require('../../lib/models/event');
 
-describe('event', () => {
+describe('event logging', () => {
 
-    before(db.drop);
-
-    const user = {
-        email: 'hacker@hacker.com',
-        password: 'abc',
-        name: 'test hacker',
-        role: 'user'
+    let user = {
+        name: 'user1',
+        email: 'one@user.com',
+        password: 'password1',
+        role: 'user',
+        status: 'active'
     };
 
-    // describe('management', () => {
-
-        // const badRequest = (url, data, code, error) =>
-        //     request
-        //         .post(url)
-        //         .send(data)
-        //         .then(
-        //             () => {
-        //                 throw new Error('status should not be ok');
-        //             },
-        //             res => {
-        //                 assert.equal(res.status, code);
-        //                 assert.equal(res.response.body.error, error);
-        //             }
-        //         );
-    // });
-
+    before(db.drop);
     
+    before(() => {
+        return db.signup(user)
+            .then(() => db.signin(user));
+    });
+
+    it('saves an event on sign up', () => {
+
+        return Event.findOne({ type: 'signup' })
+            .then(event => {
+                // assert.equal(event.user, user._id;
+                assert.equal(event.email, user.email);
+                assert.equal(event.type, 'signup');
+            });
+    
+    });
+
+    it('saves an event on sign in', () => {
+
+        return Event.findOne({ type: 'login' })
+            .then(event => {
+                // assert.equal(event.user, user._id;
+                assert.equal(event.email, user.email);
+                assert.equal(event.type, 'login');
+            });
+    
+    });
+
 });
