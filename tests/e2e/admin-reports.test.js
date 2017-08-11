@@ -12,9 +12,11 @@ describe('admin only reports', () => {
         status: 'active'
     };
 
+    //event types: ['login', 'logout', 'signup', 'failed login', 'blocked login', 'signup blocked', 'account locked']
+    
+    //event level: ['low', 'medium', 'high', 'severe']
+
     let events = [
-        //type: ['login', 'logout', 'signup', 'failed login', 'blocked login', 'signup blocked', 'account locked']
-        //level: ['low', 'medium', 'high', 'severe']
         { email: 'event1@email.com', type: 'login', level: 'low' },
         { email: 'event2@email.com', type: 'logout', level: 'low' },
         { email: 'event3@email.com', type: 'logout', level: 'low' },
@@ -35,26 +37,21 @@ describe('admin only reports', () => {
     ];
 
     before(db.drop);
-
     before(() => db.signup(admin));
-
     before(() => Promise.all(events.map(db.saveEvent)));
 
-    //TODO: CHRISTY STILL WORKING ON THIS
-
-    it.skip('/admin/reports/events?=type gets events for an enum type', () => {
+    it('/admin/reports/events?type gets events for an enum type', () => {
         let adminToken = null;
-        let eventTypes = ['login', 'logout', 'signup', 'login failed', 'login blocked', 'signup blocked', 'account locked'];
 
         return db.signin(admin)
             .then(t => adminToken = t.token)
             .then(() => request
-                .get(`/admin/reports/events?type=${eventTypes[0]}`)
+                .get('/admin/reports/events/?type=signup+blocked')
                 .set('Authorization', adminToken)
             )
             .then(res => {
                 console.log(res.body);
-                assert.ok(res.body);
+                assert.equal(res.body.length, 3);
             });
     });
 

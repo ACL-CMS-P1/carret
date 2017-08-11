@@ -1,7 +1,6 @@
 const connection = require('mongoose').connection;
 const request = require('./request');
 const Event = require('../../../lib/models/event');
-const Rule = require('../../../lib/models/rule');
 
 module.exports = {
     drop() {
@@ -25,9 +24,5 @@ module.exports = {
     saveEvent(event) {
         let newEvent = new Event(event);
         newEvent.save();
-    },
-    saveRule(rule) {
-        const savedRule = new Rule(rule);
-        return savedRule.save();
     }
 };
