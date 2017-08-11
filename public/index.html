@@ -18,15 +18,16 @@
     <hr>
     <div id="login">
         <h2>Login</h2>
-         <form action="/auth/signin/" method="post">
+          <form action="/auth/signin/" method="post"> 
+        <!-- <form id="sign-in-form"> -->
             <label>Email</label>
             <input type="email" placeholder="Enter Email" name="email" required>
             <br>
             <label>Password</label>
             <input type="password" placeholder="Enter Password" name="password" required>
             <br>
-             <button type="submit">Sign In</button> 
-             <!-- <input class="button" type="button" onclick="signin()" value="Sign In"> -->
+              <button type="submit">Sign In</button>  
+              <!-- <input class="button" type="button" onclick="signin()" value="Sign In">  -->
         </form>
     </div>
     <hr>
@@ -70,6 +71,10 @@
         </ul>
     </div>
 
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
