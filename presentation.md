@@ -58,7 +58,7 @@
 
 ---
 
-## Demo
+# Demo
 
 description | method | route
 --- | --- | ---
@@ -87,7 +87,7 @@ SET HEADER: `Authorization`: _token_
 
 
 
-## _Admin only routes_
+## Admin only routes
 
 SET HEADER: `Authorization`: _token_
 
@@ -103,7 +103,7 @@ View a user's events | GET query | `http://carret.herokuapp.com/admin/reports/ev
 
 
 
-## _User routes (admins are users too!)_
+## User routes (admins are users too!)
 
 description | method | route
 --- | --- | ---
@@ -133,12 +133,13 @@ Update my info | PATCH | `http://carret.herokuapp.com/me`
 Remove my account | DELETE | `http://carret.herokuapp.com/me`
 
 
-## _Rejections_
+## Rejections
 
 description | method | route
 --- | --- | ---
 Standard user is not allowed to access Admin options | GET | `http://carret.herokuapp.com/admin/users`
 Sign up failed with wrong email or password | POST | `http://carret.herokuapp.com/auth/signin`
+User account locks with 3 consecutive failed login attempts | POST | `http://carret.herokuapp.com/auth/signup`
 Sign up failed because user already exists | POST | `http://carret.herokuapp.com/auth/signup`
 ```
 {
@@ -150,7 +151,10 @@ Sign up failed because user already exists | POST | `http://carret.herokuapp.com
 }
 ```
 
-Description | method | route
+
+## Security Threats
+
+description | method | route
 --- | --- | ---
 Sign up failed for known hacker | POST | `http://carret.herokuapp.com/auth/signup`
 ```
