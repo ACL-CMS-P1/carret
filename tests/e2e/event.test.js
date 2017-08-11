@@ -1,8 +1,6 @@
 const db = require('./helpers/db');
 const { assert } = require('chai');
-const User = require('../../lib/models/user');
 const Event = require('../../lib/models/event');
-// const ObjectId = require('mongoose').Types.ObjectId;
 
 describe('event logging', () => {
 
@@ -19,8 +17,6 @@ describe('event logging', () => {
     before(() => {
         return db.signup(user)
             .then(() => db.signin(user));
-            // .then(() => User.find({ email: user.email }))
-            // .then(found => user = found);
     });
 
     it('saves an event on sign up', () => {
