@@ -166,3 +166,16 @@ Sign up failed for known hacker | POST | `http://carret.herokuapp.com/auth/signu
     "status": "active"
 }
 ```
+
+...more bad emails...
+```
+[
+  { "name": "Darlene Alderson", "email": "k399792@mvrht.net", "password": "fsociety", "role": "user", "status": "active"},
+  { "name": "Angela Moss", "email": "hhhhhhhhhhhhhhhh@mailinator.com", "password": "fsociety", "role": "user", "status": "active"},
+  { "name": "Tyrell Wellick", "email": "email@email.com", "password": "fsociety", "role": "user", "status": "active"},
+  { "name": "Mr Robot", "email": "k888246@mvrht.net", "password": "fsociety", "role": "user", "status": "active"},
+  { "name": "Phillip Price", "email": "mail@mail.com", "password": "fsociety", "role": "user", "status": "active"},
+  { "name": "Joanna Wellick", "email": "mail@mail.com", "password": "fsociety", "role": "user", "status": "active"},
+  { "name": "Dominique Dom DiPierro", "email": "mail@mail.com", "password": "fsociety", "role": "user", "status": "active"}
+]
+```
