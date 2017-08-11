@@ -2,7 +2,7 @@ const db = require('./helpers/db');
 const request = require('./helpers/request');
 const { assert } = require('chai');
 
-describe.only('auth', () => {
+describe('auth', () => {
 
     before(db.drop);
 
@@ -11,6 +11,15 @@ describe.only('auth', () => {
         ip: '192.168.1.1',
         password: 'abc',
         name: 'test user',
+        role: 'admin',
+        status: 'active'
+    };
+
+    const goodUser3 = {
+        email: 'petrie3.mark@gmail.com',
+        ip: '192.168.1.1',
+        password: 'abcdfghij',
+        name: 'test user2',
         role: 'admin',
         status: 'active'
     };
@@ -25,6 +34,8 @@ describe.only('auth', () => {
     };
 
     before(() => db.signup(goodUser2));
+    before(() => db.signup(goodUser3));
+    
 
     describe('user management', () => {
 
@@ -73,18 +84,18 @@ describe.only('auth', () => {
         );
 
         it('signin with wrong user', () =>
-            badRequest('/auth/signin', { email: 'bad user', password: goodUser.password }, 401, 'Invalid Login')
+            badRequest('/auth/signin', { email: goodUser3.email, password: goodUser2.password }, 401, 'Invalid Login')
         );
 
         it('signin with wrong password', () =>
-            badRequest('/auth/signin', { email: goodUser.email, password: 'bad' }, 401, 'Invalid Login')
+            badRequest('/auth/signin', { email: goodUser3.email, password: 'bad' }, 401, 'Invalid Login')
         );
 
         it('signin with valid email but wrong password creates failed login event', () =>
             request
                 .post('/auth/signin')
                 .set('Authorization', token)
-                .send({ email: goodUser.email, password: 'bad' })
+                .send({ email: goodUser2.email, password: 'bad' })
                 .then(
                     () => {
                         throw new Error('status should not be ok');
