@@ -19,10 +19,10 @@ As an Admin, I want...
 * to be able to lock users on a case by case basis
 * to be able to access an event log that includes login data such as timestamps and IPs for logins
 * the system to assess the risk of each login attempt and block users with risk scores too high
-* to be able to configure rules for risk assessment and according to my specific business needs (i.e. be able to turn set rules on and off)
 * to be able to delete users
 * to be able to alter user information (patch) by user id
-* to be able to craete reports from login event data and user data
+* to be able to create reports from login event data and user data
+* STRETCH: to be able to configure rules for risk assessment and according to my specific business needs (i.e. be able to turn set rules on and off)
 * STRETCH: to be able to define my own rules in addition to turning existing rules on and off
 * STRETCH: to be able to see appropriate data in an attractive dashboard
 
