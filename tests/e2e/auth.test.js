@@ -80,6 +80,22 @@ describe('auth', () => {
             badRequest('/auth/signin', { email: goodUser.email, password: 'bad' }, 401, 'Invalid Login')
         );
 
+        it('signin with valid email but wrong password creates failed login event', () =>
+            request
+                .post('/auth/signin')
+                .set('Authorization', token)
+                .send({ email: goodUser.email, password: 'bad' })
+                .then(
+                    () => {
+                        throw new Error('status should not be ok');
+                    },
+                    () => {
+                        return request
+                            .get('/admin/reports/events')
+                            .set('Authorization', token)
+                            .then(res => assert.deepInclude(res.body, { type: 'failed login', level: 'low' }));
+                    }));
+           
         it('signin', () =>
             request
                 .post('/auth/signin')
@@ -88,7 +104,6 @@ describe('auth', () => {
                     assert.ok(res.body.token);
                 })
         );
-
 
         it('token is invalid', () =>
             request
@@ -136,5 +151,4 @@ describe('auth', () => {
                 );
         });
     });
-
 });

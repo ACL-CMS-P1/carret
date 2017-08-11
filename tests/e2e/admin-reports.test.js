@@ -12,10 +12,6 @@ describe('admin only reports', () => {
         status: 'active'
     };
 
-    //event types: ['login', 'logout', 'signup', 'failed login', 'blocked login', 'signup blocked', 'account locked']
-    
-    //event level: ['low', 'medium', 'high', 'severe']
-
     let events = [
         { email: 'event1@email.com', type: 'login', level: 'low' },
         { email: 'event2@email.com', type: 'logout', level: 'low' },
@@ -50,11 +46,8 @@ describe('admin only reports', () => {
                 .set('Authorization', adminToken)
             )
             .then(res => {
-                console.log(res.body);
                 assert.equal(res.body.length, 3);
             });
     });
-
-    //TODO: add more reports...
 
 });
