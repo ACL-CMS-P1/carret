@@ -43,4 +43,4 @@ db.getCollection('users').insertMany([
     { name: 'Dean-Charles Chapman', email: 'Tommen.Baratheon@gameofthrones.tv', password: 'hbo', role: 'user', status: 'active' },
     { name: 'Michael McElhatton', email: 'Roose.Bolton@gameofthrones.tv', password: 'hbo', role: 'user', status: 'active' },
     { name: 'Jonathan Pryce', email: 'The.High.Sparrow@gameofthrones.tv', password: 'hbo', role: 'user' }
-])
+]);
