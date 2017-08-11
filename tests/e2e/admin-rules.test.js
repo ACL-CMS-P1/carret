@@ -32,17 +32,17 @@
 //         let adminToken = null;
 //         let returnedRules = null;
 
-//         return db.signup(adminUser)
-//             .then(t => adminToken = t.token)
-//             .then(() => request
-//                 .get('/admin/rules')
-//                 .set('Authorization', adminToken)
-//             )
-//             .then(res => {
-//                 returnedRules = res.body;
-//                 assert.deepEqual(returnedRules, rules);
-//             });
-//     });
+        return db.signup(adminUser)
+            .then(t => adminToken = t.token)
+            .then(() => request
+                .get('/admin/rules')
+                .set('Authorization', adminToken)
+            )
+            .then(res => {
+                returnedRules = res.body.sort((a, b) => a.name > b.name ? 1 : -1);
+                assert.deepEqual(returnedRules, rules);
+            });
+    });
 
 //     it('PATCH /admin/rules/:name changes rule active', () => {
 //         let adminToken = null;
