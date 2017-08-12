@@ -2,8 +2,8 @@ const db = require('./helpers/db');
 const request = require('./helpers/request');
 const { assert } = require('chai');
 
-describe('admin only options - Users API', () => {
-
+describe('admin only options - Users API', function() {
+    this.timeout(5000);
     let users = [
         {
             name: 'user1',

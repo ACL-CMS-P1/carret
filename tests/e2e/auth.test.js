@@ -15,15 +15,6 @@ describe('auth', () => {
         status: 'active'
     };
 
-    const goodUser3 = {
-        email: 'petrie3.mark@gmail.com',
-        ip: '192.168.1.1',
-        password: 'abcdfghij',
-        name: 'test user2',
-        role: 'admin',
-        status: 'active'
-    };
-
     const goodUser2 = {
         email: 'petrie2.mark@gmail.com',
         ip: '192.168.1.1',
@@ -33,9 +24,27 @@ describe('auth', () => {
         status: 'active'
     };
 
+    const goodUser3 = {
+        email: 'petrie3.mark@gmail.com',
+        ip: '192.168.1.1',
+        password: 'abceg',
+        name: 'test user3',
+        role: 'admin',
+        status: 'active'
+    };
+
+    const goodUser4 = {
+        email: 'petrie4.mark@gmail.com',
+        ip: '192.168.1.1',
+        password: 'abcedsfg',
+        name: 'test user4',
+        role: 'admin',
+        status: 'active'
+    };
+
     before(() => db.signup(goodUser2));
     before(() => db.signup(goodUser3));
-    
+    before(() => db.signup(goodUser4));
 
     describe('user management', () => {
 
@@ -84,18 +93,18 @@ describe('auth', () => {
         );
 
         it('signin with wrong user', () =>
-            badRequest('/auth/signin', { email: goodUser3.email, password: goodUser2.password }, 401, 'Invalid Login')
+            badRequest('/auth/signin', { email: goodUser2.email, password: goodUser3.password }, 401, 'Invalid Login')
         );
 
         it('signin with wrong password', () =>
-            badRequest('/auth/signin', { email: goodUser3.email, password: 'bad' }, 401, 'Invalid Login')
+            badRequest('/auth/signin', { email: goodUser2.email, password: 'bad' }, 401, 'Invalid Login')
         );
 
         it('signin with valid email but wrong password creates failed login event', () =>
             request
                 .post('/auth/signin')
                 .set('Authorization', token)
-                .send({ email: goodUser2.email, password: 'bad' })
+                .send({ email: goodUser4.email, password: 'bad' })
                 .then(
                     () => {
                         throw new Error('status should not be ok');
@@ -104,13 +113,16 @@ describe('auth', () => {
                         return request
                             .get('/admin/reports/events')
                             .set('Authorization', token)
-                            .then(res => assert.deepInclude(res.body, { type: 'failed login', level: 'low' }));
+                            .then(res => {
+                                res.body.sort((a,b) => a.createdAt > b.createdAt ? -1 : 1);
+                                assert.deepEqual(res.body[0].type, 'failed login');
+                            });
                     }));
            
         it('signin', () =>
             request
                 .post('/auth/signin')
-                .send(goodUser2)
+                .send(goodUser3)
                 .then(res => {
                     assert.ok(res.body.token);
                 })
