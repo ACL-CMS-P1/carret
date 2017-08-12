@@ -2,7 +2,8 @@ const db = require('./helpers/db');
 const { assert } = require('chai');
 const Event = require('../../lib/models/event');
 
-describe('event logging', () => {
+describe('event logging', function() {
+    this.timeout(5000);
 
     let user = {
         name: 'user1',
