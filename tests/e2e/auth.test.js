@@ -15,15 +15,6 @@ describe('auth', () => {
         status: 'active'
     };
 
-    const goodUser3 = {
-        email: 'petrie3.mark@gmail.com',
-        ip: '192.168.1.1',
-        password: 'abcdfghij',
-        name: 'test user2',
-        role: 'admin',
-        status: 'active'
-    };
-
     const goodUser2 = {
         email: 'petrie2.mark@gmail.com',
         ip: '192.168.1.1',
