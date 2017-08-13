@@ -28,7 +28,6 @@ describe('event logging', function() {
                 assert.equal(event.email, user.email);
                 assert.equal(event.type, 'signup');
             });
-    
     });
 
     it('saves an event on sign in', () => {
@@ -39,7 +38,5 @@ describe('event logging', function() {
                 assert.equal(event.email, user.email);
                 assert.equal(event.type, 'login');
             });
-    
     });
-
 });

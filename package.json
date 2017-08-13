@@ -4,7 +4,7 @@
   "engines": {
     "node": ">8.0.0"
   },
-  "description": "Alchemy Code Labs - 401 Team Project",
+  "description": "Alchemy Code Lab - 401 Team Project",
   "main": "server.js",
   "directories": {
     "lib": "lib",

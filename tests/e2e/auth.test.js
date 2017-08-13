@@ -2,12 +2,13 @@ const db = require('./helpers/db');
 const request = require('./helpers/request');
 const { assert } = require('chai');
 
-describe('auth', () => {
+describe('auth', function () {
+    this.timeout(5000);
 
     before(db.drop);
 
     const goodUser = {
-        email: 'petrie.mark@gmail.com',
+        email: 'gooduser@gmail.com',
         ip: '192.168.1.1',
         password: 'abc',
         name: 'test user',
@@ -16,7 +17,7 @@ describe('auth', () => {
     };
 
     const goodUser2 = {
-        email: 'petrie2.mark@gmail.com',
+        email: 'gooduser2@gmail.com',
         ip: '192.168.1.1',
         password: 'abcdfg',
         name: 'test user2',
@@ -25,7 +26,7 @@ describe('auth', () => {
     };
 
     const goodUser3 = {
-        email: 'petrie3.mark@gmail.com',
+        email: 'gooduser3@gmail.com',
         ip: '192.168.1.1',
         password: 'abceg',
         name: 'test user3',
@@ -34,7 +35,7 @@ describe('auth', () => {
     };
 
     const goodUser4 = {
-        email: 'petrie4.mark@gmail.com',
+        email: 'gooduser4@gmail.com',
         ip: '192.168.1.1',
         password: 'abcedsfg',
         name: 'test user4',

@@ -68,7 +68,8 @@ function ipBlacklist(ipObject) {
         });
 }
 
-describe('analyze', () => {
+describe('analyze', function () {
+    this.timeout(5000);
 
     before(db.drop);
     before(() => emailBlacklist(badEmail));

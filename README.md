@@ -1,6 +1,6 @@
 # Team ^
 
-Alchemy Code Labs - 401 Group Project
+Alchemy Code Lab - 401 Group Project
 
 * Mark Petrie (petrie.mark@gmail.com)
 * Stephanie Fitzgerald (s.e.v.fitzgerald@gmail.com)

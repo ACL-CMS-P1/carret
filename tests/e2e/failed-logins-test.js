@@ -5,7 +5,8 @@ const failedLogins = require('../../lib/utils/failed-logins');
 const ipBlacklist = require('../../lib/models/ip-blacklist');
 const emailBlacklist = require('../../lib/models/email-blacklist');
 
-describe('failed-logins', () => {
+describe('failed-logins', function () {
+    this.timeout(5000);
 
     before(db.drop);
 
