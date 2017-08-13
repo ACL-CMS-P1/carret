@@ -15,12 +15,12 @@
 * Full email risk analysis
 * Enriches client IP addresses with full risk analysis and geolocation
 * Generates IP and email blacklists
-* Role based access controls (admin, user
+* Role based access controls (admin, user)
 
 ## Third-Party API
 
-* Sqreen <https://www.sqreen.io/>
-* API Docs <https://doc.sqreen.io/reference>
+* [Sqreen](https://www.sqreen.io/)
+* [API Docs](https://doc.sqreen.io/reference)
 
 > The Sqreen API allows you to tap into our extensive knowledge base to *discover security risks* hiding in your own data. Find out whether that email address is from an anonymizing service, or that IP address is a Tor exit point. You can even find out if the address has been implicated in a past security attack.
 
