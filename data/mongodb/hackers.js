@@ -10,7 +10,6 @@ db.getCollection('users').insertMany([
     { name: 'Dominique Dom DiPierro', email: 'mail@mail.com', password: 'fsociety', role: 'user', status: 'active'}
 ]);
 
-
 //bad ip addresses
 // 103.229.126.237
 // 188.166.218.212

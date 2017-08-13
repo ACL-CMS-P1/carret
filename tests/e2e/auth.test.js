@@ -2,12 +2,13 @@ const db = require('./helpers/db');
 const request = require('./helpers/request');
 const { assert } = require('chai');
 
-describe('auth', () => {
+describe('auth', function () {
+    this.timeout(5000);
 
     before(db.drop);
 
     const goodUser = {
-        email: 'petrie.mark@gmail.com',
+        email: 'gooduser@gmail.com',
         ip: '192.168.1.1',
         password: 'abc',
         name: 'test user',
@@ -16,7 +17,7 @@ describe('auth', () => {
     };
 
     const goodUser2 = {
-        email: 'petrie2.mark@gmail.com',
+        email: 'gooduser2@gmail.com',
         ip: '192.168.1.1',
         password: 'abcdfg',
         name: 'test user2',
@@ -25,7 +26,7 @@ describe('auth', () => {
     };
 
     const goodUser3 = {
-        email: 'petrie3.mark@gmail.com',
+        email: 'gooduser3@gmail.com',
         ip: '192.168.1.1',
         password: 'abceg',
         name: 'test user3',
@@ -34,7 +35,7 @@ describe('auth', () => {
     };
 
     const goodUser4 = {
-        email: 'petrie4.mark@gmail.com',
+        email: 'gooduser4@gmail.com',
         ip: '192.168.1.1',
         password: 'abcedsfg',
         name: 'test user4',
@@ -73,16 +74,13 @@ describe('auth', () => {
         let token = '';
 
         it('signup', () => {
-            return request
-                .post('/auth/signup')
-                .send(goodUser)
-                .then(res => assert.ok(token = res.body.token));
+            return db.signup(goodUser)
+                .then(res => assert.ok(token = res.token));
         });
 
         it('can\'t use same email', () =>
             badRequest('/auth/signup', goodUser, 400, 'the email provided is already in use')
         );
-
 
         it('signin requires email', () =>
             badRequest('/auth/signin', { password: 'abc' }, 400, 'both email and password are required')
@@ -100,15 +98,10 @@ describe('auth', () => {
             badRequest('/auth/signin', { email: goodUser2.email, password: 'bad' }, 401, 'Invalid Login')
         );
 
-        it('signin with valid email but wrong password creates failed login event', () =>
-            request
-                .post('/auth/signin')
-                .set('Authorization', token)
-                .send({ email: goodUser4.email, password: 'bad' })
+        it('signin with valid email but wrong password creates failed login event', () => {
+            return db.signin({ email: goodUser4.email, password: 'bad' })
                 .then(
-                    () => {
-                        throw new Error('status should not be ok');
-                    },
+                    () => { throw new Error('status should not be ok'); },
                     () => {
                         return request
                             .get('/admin/reports/events')
@@ -117,16 +110,13 @@ describe('auth', () => {
                                 res.body.sort((a,b) => a.createdAt > b.createdAt ? -1 : 1);
                                 assert.deepEqual(res.body[0].type, 'failed login');
                             });
-                    }));
-           
-        it('signin', () =>
-            request
-                .post('/auth/signin')
-                .send(goodUser3)
-                .then(res => {
-                    assert.ok(res.body.token);
-                })
-        );
+                    });
+        });
+
+        it('signin', () => {
+            return db.signin(goodUser3)
+                .then(res => assert.ok(res.token));
+        });
 
         it('token is invalid', () =>
             request
@@ -144,7 +134,6 @@ describe('auth', () => {
                 .set('Authorization', token)
                 .then(res => assert.ok(res.body))
         );
-
     });
 
     describe('unauthorized', () => {

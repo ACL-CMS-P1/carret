@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +9,10 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <title>Secure Page</title>
 </head>
+
 <body>
     <h1>Secure Page</h1>
-    
+
     <div>
         <h2>Hello there</h2>
         <p>Would you like to <a href="#login">login</a> or <a href="#register">register</a>?</p>
@@ -18,16 +20,14 @@
     <hr>
     <div id="login">
         <h2>Login</h2>
-          <form action="/auth/signin/" method="post"> 
-        <!-- <form id="sign-in-form"> -->
+        <form action="/auth/signin/" method="post">
             <label>Email</label>
             <input type="email" placeholder="Enter Email" name="email" required>
             <br>
             <label>Password</label>
             <input type="password" placeholder="Enter Password" name="password" required>
             <br>
-              <button type="submit">Sign In</button>  
-              <!-- <input class="button" type="button" onclick="signin()" value="Sign In">  -->
+            <button type="submit">Sign In</button>
         </form>
     </div>
     <hr>
@@ -43,22 +43,16 @@
             <label>Password</label>
             <input type="password" placeholder="Enter Password" name="password" required>
             <br>
-            <label>Role</label>
-            <input type="text" placeholder="user or admin" name="role" required>
-            <br>
-            <label>Staus</label>
-            <input type="text" placeholder="active or locked" name="status" required>
-            <br>
-            <button class="button" type="submit">Sign Up</button> 
+            <button class="button" type="submit">Sign Up</button>
         </form>
     </div>
     <hr>
     <div id="user">
         <h2>User Options</h2>
         <ul>
-            <li><a href="/me">See my info.</a></li> 
+            <li><a href="/me">See my info.</a></li>
             <li><a href="">do other stuff</a></li>
-            <li><a href="">do other stuff</a></li> 
+            <li><a href="">do other stuff</a></li>
         </ul>
     </div>
     <hr>
@@ -71,10 +65,9 @@
         </ul>
     </div>
 
-    <script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"
-  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
     <script src="js/main.js"></script>
 </body>
+
 </html>

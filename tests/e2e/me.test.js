@@ -2,9 +2,8 @@ const db = require('./helpers/db');
 const request = require('./helpers/request');
 const { assert } = require('chai');
 
-describe('users api', () => {
-
-    before(db.drop);
+describe('users api', function () {
+    this.timeout(5000);
 
     const me = {
         name: 'logged in user',
@@ -14,6 +13,8 @@ describe('users api', () => {
         status: 'active'
     };
     let token = null;
+
+    before(db.drop);
     before(() => {
         return db.signup(me)
             .then(t => {
@@ -31,7 +32,6 @@ describe('users api', () => {
                     assert.deepEqual(myInfo, me);
                 });
     });
-
 
     it('PATCHes user\'s own account info', () => {
         return request.patch('/me')

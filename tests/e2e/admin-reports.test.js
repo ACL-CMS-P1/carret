@@ -2,7 +2,8 @@ const db = require('./helpers/db');
 const request = require('./helpers/request');
 const { assert } = require('chai');
 
-describe('admin only reports', () => {
+describe('admin only reports', function () {
+    this.timeout(5000);
 
     let admin = {
         name: 'Mr. Admin Reporter',
@@ -49,5 +50,4 @@ describe('admin only reports', () => {
                 assert.equal(res.body.length, 3);
             });
     });
-
 });

@@ -6,7 +6,7 @@ module.exports = {
     drop() {
         return connection.dropDatabase();
     },
-    getToken(user = { name: 'Test User', role: 'user', email: 'test@test.com', password: 'abc' }) {
+    getToken(user = { name: 'Test User', email: 'test@test.com', password: 'abc' }) {
         return request.post('/auth/signup')
             .send(user)
             .then(res => res.body.token);
@@ -22,7 +22,7 @@ module.exports = {
             .then(res => res.body);
     },
     saveEvent(event) {
-        let newEvent = new Event(event);
+        const newEvent = new Event(event);
         newEvent.save();
     }
 };
