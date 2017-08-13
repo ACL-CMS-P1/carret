@@ -74,16 +74,13 @@ describe('auth', function () {
         let token = '';
 
         it('signup', () => {
-            return request
-                .post('/auth/signup')
-                .send(goodUser)
-                .then(res => assert.ok(token = res.body.token));
+            return db.signup(goodUser)
+                .then(res => assert.ok(token = res.token));
         });
 
         it('can\'t use same email', () =>
             badRequest('/auth/signup', goodUser, 400, 'the email provided is already in use')
         );
-
 
         it('signin requires email', () =>
             badRequest('/auth/signin', { password: 'abc' }, 400, 'both email and password are required')
@@ -101,15 +98,10 @@ describe('auth', function () {
             badRequest('/auth/signin', { email: goodUser2.email, password: 'bad' }, 401, 'Invalid Login')
         );
 
-        it('signin with valid email but wrong password creates failed login event', () =>
-            request
-                .post('/auth/signin')
-                .set('Authorization', token)
-                .send({ email: goodUser4.email, password: 'bad' })
+        it('signin with valid email but wrong password creates failed login event', () => {
+            return db.signin({ email: goodUser4.email, password: 'bad' })
                 .then(
-                    () => {
-                        throw new Error('status should not be ok');
-                    },
+                    () => { throw new Error('status should not be ok'); },
                     () => {
                         return request
                             .get('/admin/reports/events')
@@ -118,16 +110,13 @@ describe('auth', function () {
                                 res.body.sort((a,b) => a.createdAt > b.createdAt ? -1 : 1);
                                 assert.deepEqual(res.body[0].type, 'failed login');
                             });
-                    }));
+                    });
+        });
 
-        it('signin', () =>
-            request
-                .post('/auth/signin')
-                .send(goodUser3)
-                .then(res => {
-                    assert.ok(res.body.token);
-                })
-        );
+        it('signin', () => {
+            return db.signin(goodUser3)
+                .then(res => assert.ok(res.token));
+        });
 
         it('token is invalid', () =>
             request
@@ -145,7 +134,6 @@ describe('auth', function () {
                 .set('Authorization', token)
                 .then(res => assert.ok(res.body))
         );
-
     });
 
     describe('unauthorized', () => {

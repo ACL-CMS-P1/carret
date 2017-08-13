@@ -46,7 +46,6 @@ describe('ensure auth middleware', () => {
                 };
 
                 ensureAuth(req, null, next);
-
             })
             .catch(done);
     });

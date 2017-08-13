@@ -1,7 +1,8 @@
 const assert = require('chai').assert;
 const sqreen = require('../../lib/utils/sqreen');
 
-describe('sqreen api', () => {
+describe('sqreen api', function () {
+    this.timeout(5000);
 
     it('screens an email and returns risk assessment with a VALID email address', () => {
         const testEmail = 'christinelaguardia@gmail.com';

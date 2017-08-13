@@ -24,7 +24,6 @@ describe('event logging', function() {
 
         return Event.findOne({ type: 'signup' })
             .then(event => {
-                // assert.equal(event.user, user._id;
                 assert.equal(event.email, user.email);
                 assert.equal(event.type, 'signup');
             });
@@ -34,7 +33,6 @@ describe('event logging', function() {
 
         return Event.findOne({ type: 'login' })
             .then(event => {
-                // assert.equal(event.user, user._id;
                 assert.equal(event.email, user.email);
                 assert.equal(event.type, 'login');
             });
