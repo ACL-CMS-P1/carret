@@ -58,5 +58,4 @@ describe('sqreen api', () => {
                 assert.equal(res.message, 'Bad Request');
             });
     });
-
 });

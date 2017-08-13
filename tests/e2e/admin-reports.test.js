@@ -49,5 +49,4 @@ describe('admin only reports', () => {
                 assert.equal(res.body.length, 3);
             });
     });
-
 });

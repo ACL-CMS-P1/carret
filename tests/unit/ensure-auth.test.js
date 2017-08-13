@@ -15,7 +15,6 @@ describe('ensure auth middleware', () => {
         };
 
         ensureAuth(req, null, next);
-
     });
 
     it('routes to error handler with bad token', done => {

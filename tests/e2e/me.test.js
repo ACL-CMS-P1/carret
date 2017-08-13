@@ -32,7 +32,6 @@ describe('users api', () => {
                 });
     });
 
-
     it('PATCHes user\'s own account info', () => {
         return request.patch('/me')
             .set('Authorization', token)

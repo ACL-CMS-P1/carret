@@ -118,7 +118,7 @@ describe('auth', () => {
                                 assert.deepEqual(res.body[0].type, 'failed login');
                             });
                     }));
-           
+
         it('signin', () =>
             request
                 .post('/auth/signin')
