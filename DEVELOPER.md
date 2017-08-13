@@ -4,7 +4,7 @@
 
 * Developers will work on feature branches
 * Branches will be named `devName-featureOrTheThingYouAreWorkingOn`
-* We will have merge our pull requests together, first thing in the morning (or through out the day)
+* We will have merge our pull request parties together, first thing in the morning (or through out the day)
 
 ## Code Style
 
@@ -40,5 +40,5 @@ As a developer, I want...
 * to use a 3rd party API to enrich the information available to the app based off of users' IP addresses
 * to be able to get enrichment data based off of both user emails and IPs
 * to use a Mongo database and Mongoose to organize and keep the login events and user data
-* to publish my package on npm so that it can be used by others
+* STRETCH: to publish my package on npm so that it can be used by others
 * STRETCH: to present login and user data to admins in an attractive and easy-to-use dashboard
