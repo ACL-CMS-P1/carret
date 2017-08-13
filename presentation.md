@@ -15,7 +15,7 @@
 * Full email risk analysis
 * Enriches client IP addresses with full risk analysis and geolocation
 * Generates IP and email blacklists
-* Role based access controls (admin, user
+* Role based access controls (admin, user)
 
 ## Third-Party API
 
