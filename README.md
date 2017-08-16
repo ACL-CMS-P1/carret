@@ -1,5 +1,7 @@
 # Team ^
 
+// initial commit 
+
 Alchemy Code Lab - 401 Group Project
 
 * Mark Petrie (petrie.mark@gmail.com)
