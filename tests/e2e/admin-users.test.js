@@ -112,12 +112,12 @@ describe('admin only options - Users API', function() {
 
         return db.signin(admin)
             .then(t => adminToken = t.token)
-            .then(() => { request
+            .then(() => request
                 .delete(`/admin/users/${myUser.email}`)
                 .set('Authorization', adminToken)
-                .then(res => {
-                    assert.deepEqual(res.body, { removed: true });
-                });
+            )
+            .then(res => {
+                assert.deepEqual(res.body, { removed: true });
             });
     });
 });

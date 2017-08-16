@@ -22,9 +22,9 @@ describe('Event model', () => {
             .then(
                 () => { throw new Error ('Expected validation error'); },
                 ({ errors }) => {
-                    assert.ok(errors.email.name);
-                    assert.ok(errors.type.name);
-                    assert.ok(errors.level.name);
+                    assert.ok(errors.email);
+                    assert.ok(errors.type);
+                    assert.ok(errors.level);
                 }
             );
     });
@@ -39,9 +39,9 @@ describe('Event model', () => {
             .then(
                 () => { throw new Error('Expected validation error'); },
                 ({ errors }) => {
-                    assert.ok(errors.email.name);
-                    assert.ok(errors.type.name);
-                    assert.ok(errors.level.name);
+                    assert.ok(errors.email);
+                    assert.ok(errors.type);
+                    assert.ok(errors.level);
                 }
             );
     });
