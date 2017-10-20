@@ -10,7 +10,7 @@ Alchemy Code Lab - 401 Group Project
 
 ## Synopsis
 
-Our project is an authentication security solution that is intended for publication as an npm package. Developers can install our security package for use in their new and existing apps that requires security. It uses a MongoDB to store user events such as signup, signin/login, failed login, etc., and other relevant user data.
+Our project is an authentication security solution that is intended for publication as an npm package. It suspends user accounts based on failed login attempts and captures IP address, geolocation and other related metadata. It also leverages the Sqreen REST API to identify IP addresses and email addresses that are known to be malicious and prevents user sign-up or sign-in. Malicious IP and email addresses are added to internal blacklists that can be exported and shared with IT security teams. Developers can install our security package for use in their new and existing apps that require enhanced login security.
 
 For coding standards and user stories, see our [DEVELOPER.md](DEVELOPER.md).
 For a more detailed description and demo code for our endpoints, see the [presentation.md](presentation.md). We recommend using postman with these examples to quickly see the responses.
