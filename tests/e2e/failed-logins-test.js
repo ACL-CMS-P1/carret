@@ -63,17 +63,17 @@ describe('failed-logins', function () {
                 is_email_malformed: false,
                 is_email_harmful: false
             })
-            .then((res) => emailBlacklist.findOne({ email: res.email })
-                .then(badEmail => {
-                    assert.equal(badEmail.email, 'attacker@yopmail.com');
-                }));
+            .then((res) => emailBlacklist.findOne({ email: res.email }))
+            .then(badEmail => {
+                assert.equal(badEmail.email, 'attacker@yopmail.com');
+            });
     });
 
     it('locks existing user account', () => {
-        return failedLogins.lockUserAccount({ email: badUser.email })
-            .then(() => User.findOne({ email: badUser.email })
-                .then(lockedUser => {
-                    assert.equal(lockedUser.status, 'locked');
-                }));
+        return failedLogins.lockUserAccount(badUser)
+            .then(() => User.findOne(badUser))
+            .then(lockedUser => {
+                assert.equal(lockedUser.status, 'locked');
+            });
     });
 });

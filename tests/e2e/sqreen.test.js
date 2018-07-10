@@ -14,16 +14,25 @@ describe('sqreen api', function () {
             });
     });
 
-    it('screens an email returns NOT FOUND with an INVALID email address', () => {
-        const testEmail = '#';
-
-        return sqreen.sqreenEmail(testEmail)
+    // use a function to encapsulate common tests
+    function testSqreenError(promise, { status, message }) {
+        return promise
             .then(() => {
                 throw new Error('should have returned an error but did not');
             }, res => {
-                assert.equal(res.status, 404);
-                assert.equal(res.message, 'Not Found');
+                assert.equal(res.status, status);
+                assert.equal(res.message, message);
             });
+    }
+
+    const testEmail
+
+    it('screens an email returns NOT FOUND with an INVALID email address', () => {
+        const testEmail = '#';
+        return testSqreenError(
+            sqreen.sqreenEmail(testEmail),
+            { status: 404, message: 'Not Found' }
+        );
     });
 
     it('screens an ip returns risk assessment with VALID ip address', () => {
@@ -38,25 +47,17 @@ describe('sqreen api', function () {
 
     it('screens an ip returns NOT FOUND with an INVALID ip address', () => {
         const testIp = '';
-
-        return sqreen.sqreenIp(testIp)
-            .then(() => {
-                throw new Error('should have returned an error but did not');
-            }, res => {
-                assert.equal(res.status, 404);
-                assert.equal(res.message, 'Not Found');
-            });
+        return testSqreenError(
+            sqreen.sqreenIp(testIp),
+            { status: 404, message: 'Not Found' }
+        );
     });
 
     it('screens an ip returns BAD REQUEST with an INVALID ip address', () => {
         const testIp = 'BLAH';
-
-        return sqreen.sqreenIp(testIp)
-            .then(() => {
-                throw new Error('should have returned an error but did not');
-            }, res => {
-                assert.equal(res.status, 400);
-                assert.equal(res.message, 'Bad Request');
-            });
+        return testSqreenError(
+            sqreen.sqreenIp(testIp),
+            { status: 400, message: 'Bad Request' }
+        );
     });
 });

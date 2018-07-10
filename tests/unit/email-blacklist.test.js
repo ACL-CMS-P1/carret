@@ -29,6 +29,7 @@ describe('email blacklist model', () => {
                 () => { throw new Error('Expected validation error but did not get any'); },
                 ({ errors }) => {
                     assert.ok(errors.email);
+                    // what about the risk_score
                 }
             );
     }); 

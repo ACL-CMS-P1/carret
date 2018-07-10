@@ -25,12 +25,9 @@ describe('users api', function () {
     it('GETs user\'s own account info', () => {
         return request.get('/me')
             .set('Authorization', token)
-            .then(
-                res => {
-                    delete me.password;
-                    const myInfo = res.body;
-                    assert.deepEqual(myInfo, me);
-                });
+            .then(({ body: myInfo }) => {
+                assert.deepEqual(myInfo, me);
+            });
     });
 
     it('PATCHes user\'s own account info', () => {
